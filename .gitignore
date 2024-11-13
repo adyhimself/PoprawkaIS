@@ -3,6 +3,7 @@ __pycache__/
 venv/
 .env
 staticfiles/
+staticfiles_collected/
 *.sqlite3
 *.log
 .vscode/
