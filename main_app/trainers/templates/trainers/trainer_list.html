@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista Trenerów{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Lista Trenerów</h1>
+    <a href="{% url 'trainer_add' %}" class="btn btn-primary mb-3">Dodaj nowego trenera</a>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for trainer in object_list %}
+        <tr>
+            <td>{{ trainer.first_name }}</td>
+            <td>{{ trainer.last_name }}</td>
+            <td>{{ trainer.email }}</td>
+            <td>{{ trainer.phone }}</td>
+            <td>
+                <a href="{% url 'trainer_edit' trainer.pk %}" class="btn btn-sm btn-warning">Edytuj</a>
+                <a href="{% url 'trainer_delete' trainer.pk %}" class="btn btn-sm btn-danger">Usuń</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

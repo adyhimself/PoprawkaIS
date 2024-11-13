@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_scripts %}
+{{ form.media }}
+<script src="{% static 'intl_tel_input/init.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if object %}Edytuj{% else %}Dodaj{% endif %} Trenera</h1>
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {% if field.name == 'phone' %}
+            {{ field|add_class:"form-control intl-tel-input" }}
+            {% else %}
+            {{ field|add_class:"form-control" }}
+            {% endif %}
+            {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+            {% if field.errors %}
+            <div class="text-danger">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Zapisz</button>
+        <a href="{% url 'trainer_list' %}" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+{% endblock %}

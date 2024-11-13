@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}PoprawkaIS - Logs{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Ostatnie 20 logów</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IP Użytkownika</th>
+            <th>Typ Akcji</th>
+            <th>ID Trenera</th>
+            <th>Data Akcji</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.user_ip }}</td>
+            <td>{{ log.action_type }}</td>
+            <td>
+                {{ log.trainer_link|safe }}
+            </td>
+            <td>{{ log.action_date }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
